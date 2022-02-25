@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { PostModel } from '@models/post.model';
+import { UserModel } from '@models/user.model';
 import { ApiService } from '@services/api.service';
-import { tap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { switchMap, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-switchmap',
@@ -9,11 +12,13 @@ import { tap } from 'rxjs/operators';
 })
 export class SwitchmapComponent implements OnInit {
 
+  public user$!: Observable<UserModel>;
+
   constructor(private apiService: ApiService) { }
 
   public ngOnInit(): void {
-    this.apiService.getPostById(1).pipe(
-
+    this.user$ = this.apiService.getPostById(1).pipe(
+      switchMap((post: PostModel) => this.apiService.getUserById(post.userId)),
       tap(console.log)
     );
   }
