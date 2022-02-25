@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PostModel } from '@models/post.model';
 import { ApiService } from '@services/api.service';
 import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-map',
@@ -17,7 +17,8 @@ export class MapComponent implements OnInit {
 
   ngOnInit(): void {
     this.post$ = this.apiService.getPostById(1).pipe(
-      tap((post: PostModel) => console.log(post))
+      tap((post: PostModel) => console.log(post)),
+      map((post: PostModel) => post.addCurrentDate())
     );
   }
 
