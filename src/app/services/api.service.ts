@@ -39,7 +39,7 @@ export class ApiService {
   }
 
   public getUserById(id: number): Observable<UserModel> {
-    return this.http.get<UserModel>(`${environment.path_api}user/${id}`).pipe(
+    return this.http.get<UserModel>(`${environment.path_api}users/${id}`).pipe(
       map((user: UserModelDTO) => UserModel.fromDto(user))
     )
   }
