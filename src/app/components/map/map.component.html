@@ -1,1 +1,9 @@
-<p>Working with RXJS Map</p>
+<h3>L'opérateur Map</h3>
+
+<p>Post :</p>
+<ul *ngIf="post$ | async as post">
+    <li>Id: {{ post.id }}</li>
+    <li>UserId: {{ post.userId }}</li>
+    <li>Title: {{ post.title }}</li>
+    <li>Body: {{ post.body }}</li>
+</ul>

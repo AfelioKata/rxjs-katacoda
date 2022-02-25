@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { PostModel } from '@models/post.model';
 import { ApiService } from '@services/api.service';
+import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-map',
@@ -8,10 +11,14 @@ import { ApiService } from '@services/api.service';
 })
 export class MapComponent implements OnInit {
 
+  public post$!: Observable<PostModel>;
+
   constructor(private apiService: ApiService) { }
 
   ngOnInit(): void {
-    this.apiService.getPosts().subscribe(e => console.log(e))
+    this.post$ = this.apiService.getPostById(1).pipe(
+      tap((post: PostModel) => console.log(post))
+    );
   }
 
 }
