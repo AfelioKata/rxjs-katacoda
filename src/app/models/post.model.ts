@@ -27,7 +27,6 @@ export class PostModel {
     }
 
     public addCurrentDate(): PostModel {
-        console.log('ok')
         this.date = new Date().toString();
         return this;
     }
